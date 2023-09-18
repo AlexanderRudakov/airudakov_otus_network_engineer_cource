@@ -1,0 +1,20 @@
+Addressing table:
+| Device        | Interface     | IP Address   | Subnet Mask   | Default Gateway |
+| ------------- | ------------- | ----------   | ----------    | --------------  |
+| R1            | Ethernet0/2.3 | 192.168.3.1  | 255.255.255.0 | N/A             |
+| R1            | Ethernet0/2.4 | 192.168.4.1  | 255.255.255.0 | N/A             |
+| S1            | VLAN 3        | 192.168.3.11 | 255.255.255.0 | 192.168.3.1     |
+| S2            | VLAN 4        | 192.168.4.12 | 255.255.255.0 | 192.168.4.1     |
+| PC-A          | NIC           | 192.168.3.3  | 255.255.255.0 | 192.168.4.1     |
+| PC-B          | NIC           | 192.168.4.3  | 255.255.255.0 | 192.168.4.1     |
+
+VLAN table:
+| VLAN          | NAME          | Interface Assigned                        | 
+| ------------- | ------------- | ------------------------------------------|  
+| 3             | Management    | Et0/1                                     | 
+| 4             | Operations    | Et0/1                                     | 
+| 111 (S1)      | DUMP          | Et0/3, Et1/0, Et1/1, Et1/2 Et1/3          | 
+| 111 (S1)      | DUMP          | Et0/2, Et0/3, Et1/0, Et1/1 Et1/2, Et1/3   |
+| 8             | Native        |                                           | 
+
+Devices configuration:
