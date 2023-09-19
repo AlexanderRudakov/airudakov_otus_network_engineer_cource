@@ -264,5 +264,3 @@ line vty 0 4
 !         
 end 
 ```
-<img src="E:/OTUS/Network Engineer/github_otus/airudakov_otus_network_engineer_cource/inter VLAN routing/Pictures/Schema Inter VLAN routing.png" />
-
