@@ -39,6 +39,10 @@ VLAN table:
 
 3. В результате настроек компьютер **PC-A** ***"увидел"*** **PC-B**
 
-|PC-A to PC-B| PC-B to PC-A |
-| ---------- | ------------ |
-|            |              |
+**PC-A to PC-B**
+
+![PCAtoPCB](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/02%20inter%20VLAN%20routing/Pictures/PC-A%20to%20PC-B.PNG)
+
+**PC-B to PC-A**
+
+![PCBtoPCA](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/02%20inter%20VLAN%20routing/Pictures/PC-B%20to%20PC-A.png)
