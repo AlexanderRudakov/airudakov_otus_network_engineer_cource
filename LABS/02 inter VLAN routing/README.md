@@ -33,5 +33,6 @@ VLAN table:
 # Ход работы:
 1. В среде EVE-NG была реализована схема:
 
+![image](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/assets/44857197/a401146f-6986-47f8-bcae-a53bcf217b95)
 
 
