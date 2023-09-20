@@ -32,6 +32,7 @@ VLAN table:
 
 # Ход работы:
 1. В среде EVE-NG была реализована схема:
+
 ![interVlanRoutingschema](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/02%20inter%20VLAN%20routing/Pictures/Schema%20Inter%20VLAN%20routing.png)
 
 2. Было настроенно указанное на схеме оборудование. Конфигурации оборудования можно найти в соответсвующей [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/02%20inter%20VLAN%20routing/configs)
