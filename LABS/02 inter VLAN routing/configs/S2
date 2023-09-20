@@ -1,0 +1,91 @@
+# **S2**
+```
+S2#sh run
+Building configuration...
+!
+! Last configuration change at 15:14:11 UTC Tue Sep 19 2023
+!
+service password-encryption
+!
+hostname S2
+!
+enable secret 5 $1$u08L$ZU.rqktKlLB4tsK.gZMGT1
+!
+username class privilege 15 secret 5 $1$6DNJ$e0Cd4bCCF9dK0hmwPFpLx0       
+!         
+no ip domain-lookup                             
+!         
+interface Ethernet0/0
+ switchport trunk allowed vlan 3,4
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 8
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree portfast edge
+!         
+interface Ethernet0/1
+ switchport access vlan 4
+ switchport mode access
+ switchport nonegotiate
+ spanning-tree portfast edge
+!         
+interface Ethernet0/2
+ switchport access vlan 111
+ switchport mode access
+ switchport nonegotiate
+ shutdown 
+ spanning-tree portfast edge
+!         
+interface Ethernet0/3
+ switchport access vlan 111
+ switchport mode access
+ switchport nonegotiate
+ shutdown 
+ spanning-tree portfast edge
+!         
+interface Ethernet1/0
+ switchport access vlan 111
+ switchport mode access
+ switchport nonegotiate
+ shutdown 
+ spanning-tree portfast edge
+!         
+interface Ethernet1/1
+ switchport access vlan 111
+ switchport mode access
+ switchport nonegotiate
+ shutdown 
+ spanning-tree portfast edge
+!         
+interface Ethernet1/2
+ switchport access vlan 111
+ switchport mode access
+ switchport nonegotiate
+ shutdown 
+ spanning-tree portfast edge
+!         
+interface Ethernet1/3
+ switchport access vlan 111
+ switchport mode access
+ switchport nonegotiate
+ shutdown 
+ spanning-tree portfast edge
+!         
+interface Vlan4
+ ip address 192.168.4.12 255.255.255.0
+!         
+ip default-gateway 192.168.4.1              
+!         
+banner motd ^CUnauthorized access to this device is prohibited!^C
+!         
+line con 0
+ password 7 121A0C041104
+ logging synchronous
+ login    
+line aux 0
+line vty 0 4
+ password 7 030752180500
+ login    
+!                 
+end 
+```

@@ -1,0 +1,53 @@
+# **R1**
+```
+R1#sh run
+Building configuration...
+!
+service password-encryption
+!
+hostname R1
+!
+enable secret 5 $1$stp0$6e/PLnX/qHb/6EmPD/4q9.        
+!         
+no ip domain lookup
+!                         
+username class privilege 15 secret 5 $1$3Bbi$yyyu4W53pNz5h91Ll6CV1.        
+!         
+interface Ethernet0/0
+ no ip address
+ shutdown 
+!         
+interface Ethernet0/1
+ no ip address
+ shutdown 
+!         
+interface Ethernet0/2
+ no ip address
+!         
+interface Ethernet0/2.3
+ encapsulation dot1Q 3
+ ip address 192.168.3.1 255.255.255.0
+!         
+interface Ethernet0/2.4
+ encapsulation dot1Q 4
+ ip address 192.168.4.1 255.255.255.0
+!         
+interface Ethernet0/3
+ no ip address
+ shutdown                 
+!                                  
+banner motd ^CUnauthorized access to this device is prohibited!^C
+!         
+line con 0
+ password 7 00071A150754
+ logging synchronous
+ login    
+line aux 0
+line vty 0 4
+ password 7 05080F1C2243
+ login    
+ transport input none
+!         
+!         
+end 
+```
