@@ -38,3 +38,6 @@ VLAN table:
 2. Было настроенно указанное на схеме оборудование. Конфигурации оборудования можно найти в соответсвующей [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/02%20inter%20VLAN%20routing/configs)
 
 3. В результате настроек компьютер **PC-A** ***"увидел"*** **PC-B**
+|PC-A to PC-B| PC-B to PC-A |
+| ---------- | ------------ |
+|            |              |
