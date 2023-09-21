@@ -111,4 +111,4 @@ VLAN table:
 ![PCBtoPCA](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/02%20inter%20VLAN%20routing/Pictures/PC-B%20to%20PC-A.png)
 
 
-   ***Все вайлы конфигурации находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/02%20inter%20VLAN%20routing/configs)
+   ***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/02%20inter%20VLAN%20routing/configs)
