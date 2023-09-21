@@ -21,7 +21,6 @@ interface Ethernet0/0
  switchport trunk native vlan 8
  switchport mode trunk
  switchport nonegotiate
- spanning-tree portfast edge
 !         
 interface Ethernet0/1
  switchport access vlan 4
