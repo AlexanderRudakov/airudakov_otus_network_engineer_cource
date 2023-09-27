@@ -100,4 +100,5 @@ h.	Скопируйте текущую конфигурацию в файл за
 
 **2. Выбор корневого коммутатора.**<br/>
 
-![ping]()
+![ping](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/03%20STP/pictures/pingS3_S1.PNG)
+
