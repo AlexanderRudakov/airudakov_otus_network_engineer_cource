@@ -109,4 +109,6 @@ c. Включите порты F0/2 и F0/4 на всех коммутатора
 ![ping](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/03%20STP/pictures/pingS3_S1.PNG)
 
 d. Отобразите данные протокола **spanning-tree**:
-![shspan]()
+
+![shspan](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/03%20STP/pictures/STP_root_switch(1).PNG)
+
