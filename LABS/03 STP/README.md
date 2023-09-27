@@ -92,6 +92,7 @@ h.	Скопируйте текущую конфигурацию в файл за
 Успешно ли выполняется эхо-запрос от коммутатора S1 на коммутатор S3? ***Да*** <br/>
 Успешно ли выполняется эхо-запрос от коммутатора S2 на коммутатор S3? ***Да*** <br/>
 ***ping c S1 коммутатора S3***
+
 ![ping](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/03%20STP/pictures/pingS1_S3.PNG)
 
 
