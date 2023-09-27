@@ -112,3 +112,7 @@ d. Отобразите данные протокола **spanning-tree**:
 
 ![shspan](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/03%20STP/pictures/STP_root_switch(1).PNG)
 
+С учетом данных, на скриншоте оветьте на вопросы:
+
+![shspan_info](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/03%20STP/pictures/sh_span_info.PNG)
+
