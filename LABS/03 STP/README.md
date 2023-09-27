@@ -2,6 +2,7 @@
 
 **Топология:**
 
+![Топология](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/03%20STP/pictures/topology.PNG)
 
 **Таблица адресации:**
 | Device        | Interface     | IP Address   | Subnet Mask   |  
