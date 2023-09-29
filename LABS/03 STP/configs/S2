@@ -1,0 +1,121 @@
+S2#sh run
+Building configuration...
+
+Current configuration : 1516 bytes
+!
+! Last configuration change at 18:30:48 UTC Fri Sep 29 2023
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname S2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$v1Ug$DAGH8gTbd7yuNfMNGhkAB1
+!
+no aaa new-model
+!
+!
+!
+!         
+!         
+!         
+!         
+!         
+no ip domain-lookup
+ip cef    
+no ipv6 cef
+!         
+!         
+!         
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!         
+vlan internal allocation policy ascending
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+interface Ethernet0/0
+ shutdown 
+!         
+interface Ethernet0/1
+ shutdown 
+!         
+interface Ethernet0/2
+ shutdown 
+!         
+interface Ethernet0/3
+ shutdown 
+!         
+interface Ethernet1/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+ shutdown 
+!         
+interface Ethernet1/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!         
+interface Ethernet1/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+ shutdown 
+!         
+interface Ethernet1/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree cost 18
+!         
+interface Vlan1
+ ip address 192.168.1.2 255.255.255.0
+!         
+ip forward-protocol nd
+!         
+no ip http server
+no ip http secure-server
+!         
+!         
+!         
+!         
+!         
+!         
+control-plane
+!         
+banner motd ^C
+Attention!
+Please log out immediately if you are not an authorized administrator!
+^C        
+!         
+line con 0
+ password 7 094F471A1A0A
+ logging synchronous
+ login    
+line aux 0
+line vty 0 4
+ password 7 060506324F41
+ login    
+!         
+!         
+end       
+       
