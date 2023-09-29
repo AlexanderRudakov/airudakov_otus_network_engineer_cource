@@ -180,3 +180,6 @@ Et1/3               Root FWD 18        128.8    Shr
 3.	Если оба значения на двух портах равны, каким будет следующее значение, которое использует протокол STP при выборе порта?
 
 У кого  Port ID меньше.S
+
+ 
+ ***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/03%20STP/configs)
