@@ -254,4 +254,5 @@ Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
 
 Поэтому протокол STP увидел это и заблокировал "невыгодный порт" чтобы не создавать петлю. Тем самым манипулируя стоимостями интерфейсов можно назначать нужные нам статусы интерфейсов.
 
+
 ***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/03%20STP/configs)
