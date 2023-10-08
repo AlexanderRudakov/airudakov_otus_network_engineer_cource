@@ -31,3 +31,6 @@ Part 2: Configure and verify two DHCPv4 Servers on R1
 
 Part 3: Configure and verify a DHCP Relay on R2
 
+## Part 1: Build the Network and Configure Basic Device Settings
+
+![mainscheme](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/pictures/Lab%20-%20Implement%20DHCPv4.PNG)
