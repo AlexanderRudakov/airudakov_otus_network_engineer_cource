@@ -17,11 +17,11 @@ Addressing table:
 VLAN Table:
 | VLAN          | Name          | Interface Assigned   |
 | ------------- | ------------- | -------------------- |
-| 1             |               |                      |
-| 100           |               |                      |
-| 200           |               |                      |
-| 999           |               |                      |
-| 1000          |               |                      |
+| 1             | N/A           |                      |
+| 100           | Clients       |                      |
+| 200           | Management    |                      |
+| 999           | Parking_Lot   |                      |
+| 1000          | Native        |                      |
 
 # Objectives
 
@@ -33,4 +33,7 @@ Part 3: Configure and verify a DHCP Relay on R2
 
 ## Part 1: Build the Network and Configure Basic Device Settings
 
+**Main Scheme**
+
 ![mainscheme](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/pictures/Lab%20-%20Implement%20DHCPv4.PNG)
+
