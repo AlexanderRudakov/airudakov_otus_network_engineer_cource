@@ -1,0 +1,114 @@
+S1#sh run
+Building configuration...
+
+Current configuration : 1558 bytes
+!
+! Last configuration change at 17:18:17 UTC Tue Oct 17 2023
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname S1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$eHly$8IcMbud/3gU/65XJ/kGo0/
+!
+no aaa new-model
+!
+!
+!
+!         
+!         
+!         
+!         
+!         
+no ip domain-lookup
+ip cef    
+no ipv6 cef
+!         
+!         
+!         
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!         
+vlan internal allocation policy ascending
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+interface Ethernet0/0
+ switchport access vlan 100
+ switchport mode access
+ spanning-tree portfast edge
+!         
+interface Ethernet0/1
+ switchport trunk allowed vlan 1,100,200,1000
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ switchport nonegotiate
+ ip dhcp snooping trust
+!         
+interface Ethernet0/2
+ switchport access vlan 999
+ switchport mode access
+ shutdown 
+ spanning-tree portfast edge
+!         
+interface Ethernet0/3
+ switchport access vlan 999
+ switchport mode access
+ shutdown 
+ spanning-tree portfast edge
+!         
+interface Vlan200
+ ip address 192.168.1.66 255.255.255.224
+!         
+ip default-gateway 192.168.1.65
+ip forward-protocol nd
+!         
+no ip http server
+no ip http secure-server
+!         
+ip route 0.0.0.0 0.0.0.0 192.168.1.65
+!         
+!         
+!         
+!         
+!         
+control-plane
+!         
+banner motd ^CC
+Attention!
+Please log out immediately if you are not an authorized administrator!
+^C        
+!         
+line con 0
+ exec-timeout 0 0
+ password 7 060506324F41
+ logging synchronous
+ login    
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ logging synchronous
+ login    
+!         
+!         
+end    
