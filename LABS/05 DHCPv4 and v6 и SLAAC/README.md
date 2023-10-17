@@ -260,9 +260,13 @@ VPCS> ping 192.168.1.7
 84 bytes from 192.168.1.7 icmp_seq=5 ttl=62 time=1.075 ms
 ```
 
+***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/configs)
+
+
 Далее будет рассмотрена настройка для IPv6.
 
 # DHCP/v6
+
 
 
 ***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/configs)
