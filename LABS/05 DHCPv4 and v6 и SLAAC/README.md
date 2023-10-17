@@ -263,7 +263,7 @@ VPCS> ping 192.168.1.7
 Далее будет рассмотрена настройка для IPv6.
 
 # DHCP/v6
-!
+
 
 ***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/configs)
 
