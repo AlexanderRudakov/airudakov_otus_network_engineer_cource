@@ -1,4 +1,4 @@
-# DHCPv4/v6 и SLAAC
+# DHCPv4
 
 
 
@@ -14,7 +14,7 @@ Addressing table:
 | R2            | et0/0         | 10.0.0.2     | 255.255.255.252  | N/A             |
 | R2            | et0/1         | 192.168.1.97 | 255.255.255.240  | N/A             |
 | S1            | VLAN200       | 192.168.1.66 | 255.255.255.224  | 192.168.1.97    |
-| S2            | VLAN1         | 192.168.1.98 | 255.255.255.240  | 192.168.1.97    |
+| S2            | VLAN1         | N/A          | N/A              | N/A             |
 | PC-A          | NIC           | DHCP         | DHCP             | DHCP            |
 | PC-B          | NIC           | DHCP         | DHCP             | DHCP            |
 
@@ -58,6 +58,211 @@ Et0/0                        connected    100          auto   auto unknown
 ```
 Конечно, при условии, что DHCP настроен и функционирует на R1.
 
+## Ход работы
+
+Рачитать подсеть исходя из условия лабораторной работы это должна быть 1 сеть **/24** и поделить на 3 части, сеть А, В, С соответсвенно:
+
+- А: 192.168.1.0 255.255.255.192 (VLAN100) на 58 хостов
+- B: 192.168.1.65 255.255.255.224 (VLAN200) на 28 хостов
+- C: 192.168.1.96 255.255.255.240 (VLAN1) на 12 хостов
+
+Далее нужно было выполнить базовую настройку маршрутизаторов и коммутаторов:
+
+```
+!
+hostname R1
+!
+no ip domain lookup
+!
+service password-encryption
+!
+enable secret 5 $1$aD1I$wSEtLv.cJKCeYmCGxP4VP/
+!
+banner motd ^CCC
+Attention!
+Please log out immediately if you are not an authorized administrator!
+^C 
+!         
+line con 0
+ exec-timeout 0 0
+ password 7 1511021F0725
+ logging synchronous
+ login    
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password 7 01100F175804
+ logging synchronous
+ login    
+ transport input none
+!         
+```
+на **R2** конфигурация аналогичная.
+
+Базовая настройка на примере S1 выглядит следующим образом:
+```
+!
+hostname S1
+!
+enable secret 5 $1$eHly$8IcMbud/3gU/65XJ/kGo0/
+!
+no ip domain lookup
+!         
+banner motd ^CC
+Attention!
+Please log out immediately if you are not an authorized administrator!
+^C        
+!
+line con 0
+ exec-timeout 0 0
+ password 7 060506324F41
+ logging synchronous
+ login    
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ logging synchronous
+ login    
+!       
+```
+
+Дальше нужно было настроить маршрутизацию между **R1** и **R2** (маршрут по умолчанию) и проверить работоспособность (по ping должен быть доступен интерфейс et0/1 на **R2**)
+
+**R1**
+```
+R1#sh ip route
+Gateway of last resort is 10.0.0.2 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.0.0.2
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.0.0.0/30 is directly connected, Ethernet0/0
+L        10.0.0.1/32 is directly connected, Ethernet0/0
+```
+
+**R2**
+```
+R2#sh ip route 
+Gateway of last resort is 10.0.0.1 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.0.0.1
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.0.0.0/30 is directly connected, Ethernet0/0
+L        10.0.0.2/32 is directly connected, Ethernet0/0
+```
+
+```
+R1#ping 192.168.1.97
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.1.97, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+```
+
+Далее нужно было настроить VLAN на свичах, и SVI интерфейсы (стоит отметить, что использование VLAN1 на **S2** было условием лабораторной работы - на практике следует избегать VLAN1):
+
+**S1** 
+```
+S1#sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    
+100  CLIENTS                          active    Et0/0
+200  MANAGEMENT                       active    
+999  PARKING-LOT                      active    Et0/2, Et0/3
+1000 NATIVE                           active    
+!
+!
+S1#sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol
+Ethernet0/0            unassigned      YES unset  up                    up      
+Ethernet0/1            unassigned      YES unset  up                    up      
+Ethernet0/2            unassigned      YES unset  administratively down down    
+Ethernet0/3            unassigned      YES unset  administratively down down    
+Vlan200                192.168.1.66    YES NVRAM  up                    up     
+```
+
+
+**S2**
+```
+S2#sh vla
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Et0/0
+999  VLAN0999                         active    Et0/2, Et0/3
+1000 NATIVE                           active   
+!
+!
+S2#sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol
+Ethernet0/0            unassigned      YES unset  up                    up      
+Ethernet0/1            unassigned      YES unset  up                    up      
+Ethernet0/2            unassigned      YES unset  administratively down down    
+Ethernet0/3            unassigned      YES unset  administratively down down    
+Vlan1                  192.168.1.98    YES manual up                    up 
+```
+
+Дальше нужно было настроить DHCP  на **R1** и DHCP relay на **R2** (на **R2** это выполняется на интерфейсе который смотрит в сеть с хостами где нужна настройка DHCP). Помимо шлюза нужно было настроить еще и время аренды "2 дня, 12 часов, 30 минут".
+
+**R1**
+```
+R1#sh running-config | section dhcp
+ip dhcp excluded-address 192.168.1.1 192.168.1.6
+ip dhcp pool POOL100
+ network 192.168.1.0 255.255.255.192
+ default-router 192.168.1.1 
+ lease 2 12 30
+ip dhcp pool POOL1R2
+ network 192.168.1.96 255.255.255.240
+ default-router 192.168.1.97 
+ lease 2 12 30
+```
+**R2** 
+```
+R2#sh run int et0/1
+Building configuration...
+
+Current configuration : 98 bytes
+!
+interface Ethernet0/1
+ ip address 192.168.1.97 255.255.255.240
+ ip helper-address 10.0.0.1
+end
+```
+
+Результатом проделанных действиий стало то что **PC-A** и **PC-В** получили свои адреса из нужных нам подсетей и смогли пропинговать друг друга:
+
+**PC-A**
+```
+VPCS>  ip dhcp
+DDORA IP 192.168.1.7/26 GW 192.168.1.1
+
+VPCS> ping 192.168.1.100
+84 bytes from 192.168.1.100 icmp_seq=1 ttl=62 time=2.687 ms
+84 bytes from 192.168.1.100 icmp_seq=2 ttl=62 time=1.090 ms
+84 bytes from 192.168.1.100 icmp_seq=3 ttl=62 time=1.159 ms
+84 bytes from 192.168.1.100 icmp_seq=4 ttl=62 time=0.968 ms
+84 bytes from 192.168.1.100 icmp_seq=5 ttl=62 time=0.951 ms
+```
+
+**PC-В**
+```
+VPCS> ip dhcp
+DDORA IP 192.168.1.100/28 GW 192.168.1.97
+
+VPCS> ping 192.168.1.7
+
+84 bytes from 192.168.1.7 icmp_seq=1 ttl=62 time=2.432 ms
+84 bytes from 192.168.1.7 icmp_seq=2 ttl=62 time=0.987 ms
+84 bytes from 192.168.1.7 icmp_seq=3 ttl=62 time=0.987 ms
+84 bytes from 192.168.1.7 icmp_seq=4 ttl=62 time=0.937 ms
+84 bytes from 192.168.1.7 icmp_seq=5 ttl=62 time=1.075 ms
+```
+
+Далее будет рассмотрена настройка для IPv6.
+
+# DHCP/v6
 
 
 ***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/configs)
