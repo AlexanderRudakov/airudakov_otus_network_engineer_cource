@@ -267,6 +267,31 @@ VPCS> ping 192.168.1.7
 
 # DHCP/v6
 
+**Addressing Table**
+
+| Device        | Interface     | IPv6 Address           |
+| ------------- | ------------- | -----------------------|
+| R1            | et0/0         | 2001:db8:acad:2::1 /64 |
+|               |               | fe80::1                |
+| R1            | et0/1         | 2001:db8:acad:1::1/64  |
+|               |               | fe80::1                |
+| R2            | et0/0         | 2001:db8:acad:2::2/64  |
+|               |               | fe80::2                |
+| R2            | et0/1         | 2001:db8:acad:3::1 /64 |
+|               |               | fe80::1                |
+|LAP-A          | NIC           | DHCP                   |
+|LAP-B          | NIC           | DHCP                   |
+
+
+Базовая настройка устройств аналогична настройке для **DHCPv4** отличия только в имени хостов:
+```
+hostname R3
+hostname S3
+hostname R4
+hostname S4
+```
+
+![mainscheme]()
 
 
 ***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/configs)
