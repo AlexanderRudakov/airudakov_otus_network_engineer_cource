@@ -291,7 +291,7 @@ hostname R4
 hostname S4
 ```
 
-![mainscheme]()
+![mainscheme](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/pictures/DHCPv6main_scheme.PNG)
 
 
 ***Все вайлы конфигураций находятся в*** [папке](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/tree/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/configs)
