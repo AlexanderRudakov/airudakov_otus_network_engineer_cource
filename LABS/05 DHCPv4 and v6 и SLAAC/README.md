@@ -412,6 +412,86 @@ VPCS> ping 2001:db8:acad:1:2050:79ff:fe66:6807
 2001:db8:acad:1:2050:79ff:fe66:6807 icmp6_seq=5 ttl=60 time=1.294 ms
 ```
 
+>Step 2: Configure R1 to provide stateless DHCPv6 for PC-A.
+Далее я настроил по инструкции stateless DHCPv6 для LAP-A
+```
+R3(config)#ipv6 dhcp pool R1-STATELESS
+R3(config-dhcpv6)#dns-server 2001:db8:acad::254
+R3(config-dhcpv6)#domain-name STATELESS.com
+R3(config-dhcpv6)#exit
+R3(config)#int et0/1
+R3(config-if)#ipv6 nd other-config-flag
+R3(config-if)#ipv6 dhcp server R1-STATELESS
+```
+Получившийся результат повторяет конфигурацию LAP-A выше
+```
+VPCS> show ipv6
+
+NAME              : VPCS[1]
+LINK-LOCAL SCOPE  : fe80::250:79ff:fe66:6807/64
+GLOBAL SCOPE      : 2001:db8:acad:1:2050:79ff:fe66:6807/64
+DNS               : 
+ROUTER LINK-LAYER : aa:bb:cc:00:b0:10
+MAC               : 00:50:79:66:68:07
+LPORT             : 20000
+RHOST:PORT        : 127.0.0.1:30000
+MTU:              : 1500
+```
+Но так как функционал VPC не поддерживает работу с DNS, то мы тут не увидим результата. Однако, выполняется следующее условие из лабораторной работы:
+
+>f.	Test connectivity by pinging R2’s G0/0/1 interface IP address.
+
+В моем случае это **R4** и интерфейс **et0/1** (c LAP-A)
+```
+VPCS> ping 2001:DB8:ACAD:3::1
+
+2001:DB8:ACAD:3::1 icmp6_seq=1 ttl=63 time=0.717 ms
+2001:DB8:ACAD:3::1 icmp6_seq=2 ttl=63 time=0.908 ms
+2001:DB8:ACAD:3::1 icmp6_seq=3 ttl=63 time=0.727 ms
+2001:DB8:ACAD:3::1 icmp6_seq=4 ttl=63 time=0.688 ms
+2001:DB8:ACAD:3::1 icmp6_seq=5 ttl=63 time=0.901 ms
+```
+
+>Part 4: Configure a stateful DHCPv6 server on R1
+
+В моем случае это **R3** и интерфейс **et0/0**
+```
+R3#conf t
+R3(config)#ipv6 dhcp pool R2-STATEFUL
+R3(config-dhcpv6)#address prefix 2001:db8:acad:3:aaa::/80
+R3(config-dhcpv6)#dns-server 2001:db8:acad::254
+R3(config-dhcpv6)#domain-name STATEFUL.com
+R3(config-dhcpv6)#exit
+R3(config)#int et 0/0
+R3(config-if)#ipv6 dhcp server R2-STATEFUL
+R3(config-if)#end
+```
+
+>Step 2: Configure R2 as a DHCP relay agent for the LAN on G0/0/1.
+
+В моем случае это **R4** и интерфейс **et0/1**
+```
+R4#conf t
+R4(config)#int et0/1
+R4(config-if)#ipv6 nd managed-config-flag
+R4(config-if)#ipv6 dhcp relay destination 2001:db8:acad:2::1 et0/0 
+R4(config-if)#exit
+```
+
+Но так как функционал VPC не поддерживает работу с DNS, то мы тут не увидим результата. Однако, выполняется следующее условие из лабораторной работы:
+
+>c.	Test connectivity by pinging R1’s G0/0/1 interface IP address.
+
+В моем случае это **R3** и интерфейс **et0/1** (c LAP-B)
+```
+VPCS> ping 2001:DB8:ACAD:1::1
+
+2001:DB8:ACAD:1::1 icmp6_seq=1 ttl=63 time=1.199 ms
+2001:DB8:ACAD:1::1 icmp6_seq=2 ttl=63 time=0.820 ms
+2001:DB8:ACAD:1::1 icmp6_seq=3 ttl=63 time=0.790 ms
+2001:DB8:ACAD:1::1 icmp6_seq=4 ttl=63 time=1.036 ms
+2001:DB8:ACAD:1::1 icmp6_seq=5 ttl=63 time=0.770 ms
+```
 
 
 
