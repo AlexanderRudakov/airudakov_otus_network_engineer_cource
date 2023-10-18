@@ -271,13 +271,13 @@ VPCS> ping 192.168.1.7
 
 | Device        | Interface     | IPv6 Address           |
 | ------------- | ------------- | -----------------------|
-| R1            | et0/0         | 2001:db8:acad:2::1 /64 |
+| R3            | et0/0         | 2001:db8:acad:2::1 /64 |
 |               |               | fe80::1                |
-| R1            | et0/1         | 2001:db8:acad:1::1/64  |
+| R3            | et0/1         | 2001:db8:acad:1::1/64  |
 |               |               | fe80::1                |
-| R2            | et0/0         | 2001:db8:acad:2::2/64  |
+| R4            | et0/0         | 2001:db8:acad:2::2/64  |
 |               |               | fe80::2                |
-| R2            | et0/1         | 2001:db8:acad:3::1 /64 |
+| R4            | et0/1         | 2001:db8:acad:3::1 /64 |
 |               |               | fe80::1                |
 |LAP-A          | NIC           | DHCP                   |
 |LAP-B          | NIC           | DHCP                   |
@@ -293,6 +293,124 @@ hostname S4
 
 ![mainscheme](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/05%20DHCPv4%20and%20v6%20%D0%B8%20SLAAC/pictures/DHCPv6main_scheme.PNG)
 
+
+Далее цитата из описания лабораторной работы:
+>Step 4: Configure interfaces and routing for both routers.
+a.	Configure the G0/0/0 and G0/0/1 interfaces on R1 and R2 with the IPv6 addresses specified in the table above.
+b.	Configure a default route on each router pointed to the IP address of G0/0/0 on the other router.
+c.	Verify routing is working by pinging R2’s G0/0/1 address from R1
+d.	Save the running configuration to the startup configuration file.
+
+Настройка интерфейсов и статического маршрута по умолчанию выглядит так:
+**SR3**
+``` 
+R3(config-if-range)#int et0/0      
+R3(config-if)#ipv6 address 2001:db8:acad:2::1/64
+R3(config-if)#ipv6 address fe80::1 link-local 
+R3(config-if)#int et0/1
+R3(config-if)#ipv6 address  2001:db8:acad:1::1/64
+R3(config-if)#ipv6 address fe80::1 link-local 
+!
+R3#sh ipv6 interface brief
+Ethernet0/0            [up/up]
+    FE80::1
+    2001:DB8:ACAD:2::1
+Ethernet0/1            [up/up]
+    FE80::1
+    2001:DB8:ACAD:1::1
+!
+R3(config)#ipv6 unicast-routing
+!
+R3(config)#ipv6 route ::/0 2001:DB8:ACAD:2::2
+!
+R3#ping 2001:DB8:ACAD:3::1
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 2001:DB8:ACAD:3::1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+!
+```
+
+**R4**
+```
+R4(config)#int et 0/0
+R4(config-if)#ipv6 address 2001:db8:acad:2::2/64
+R4(config-if)#ipv6 address fe80::2 link-local 
+R4(config-if)#int et 0/1
+R4(config-if)#ipv6 address 2001:db8:acad:3::1/64 
+R4(config-if)#ipv6 address fe80::1 link-local 
+R4(config-if)#exit
+!
+ipv6 unicast-routing
+!
+R4(config)#do sh ipv6 int br
+Ethernet0/0            [up/up]
+    FE80::2
+    2001:DB8:ACAD:2::2
+Ethernet0/1            [up/up]
+    FE80::1
+    2001:DB8:ACAD:3::1
+Ethernet0/2            [administratively down/down]
+    unassigned
+Ethernet0/3            [administratively down/down]
+    unassigned
+!
+R4(config)#ipv6 route ::/0 2001:DB8:ACAD:2::1
+!
+R4#ping 2001:DB8:ACAD:1::1
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 2001:DB8:ACAD:1::1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+!
+```
+
+Результат такой, что **LAP-A** получает IPv6 адрес и может пинговать **LAP-B**
+**LAP-A**
+```
+VPCS> show ipv6
+
+NAME              : VPCS[1]
+LINK-LOCAL SCOPE  : fe80::250:79ff:fe66:6807/64
+GLOBAL SCOPE      : 2001:db8:acad:1:2050:79ff:fe66:6807/64
+DNS               : 
+ROUTER LINK-LAYER : aa:bb:cc:00:b0:10
+MAC               : 00:50:79:66:68:07
+LPORT             : 20000
+RHOST:PORT        : 127.0.0.1:30000
+MTU:              : 1500
+
+VPCS> ping 2001:db8:acad:3:2050:79ff:fe66:6808
+
+2001:db8:acad:3:2050:79ff:fe66:6808 icmp6_seq=1 ttl=60 time=1.088 ms
+2001:db8:acad:3:2050:79ff:fe66:6808 icmp6_seq=2 ttl=60 time=1.170 ms
+2001:db8:acad:3:2050:79ff:fe66:6808 icmp6_seq=3 ttl=60 time=1.391 ms
+2001:db8:acad:3:2050:79ff:fe66:6808 icmp6_seq=4 ttl=60 time=1.030 ms
+2001:db8:acad:3:2050:79ff:fe66:6808 icmp6_seq=5 ttl=60 time=1.122 ms
+```
+
+**LAP-B**
+```
+VPCS> sh ipv6
+
+NAME              : VPCS[1]
+LINK-LOCAL SCOPE  : fe80::250:79ff:fe66:6808/64
+GLOBAL SCOPE      : 2001:db8:acad:3:2050:79ff:fe66:6808/64
+DNS               : 
+ROUTER LINK-LAYER : aa:bb:cc:00:c0:10
+MAC               : 00:50:79:66:68:08
+LPORT             : 20000
+RHOST:PORT        : 127.0.0.1:30000
+MTU:              : 1500
+
+VPCS> ping 2001:db8:acad:1:2050:79ff:fe66:6807
+
+2001:db8:acad:1:2050:79ff:fe66:6807 icmp6_seq=1 ttl=60 time=20.046 ms
+2001:db8:acad:1:2050:79ff:fe66:6807 icmp6_seq=2 ttl=60 time=1.127 ms
+2001:db8:acad:1:2050:79ff:fe66:6807 icmp6_seq=3 ttl=60 time=1.050 ms
+2001:db8:acad:1:2050:79ff:fe66:6807 icmp6_seq=4 ttl=60 time=1.606 ms
+2001:db8:acad:1:2050:79ff:fe66:6807 icmp6_seq=5 ttl=60 time=1.294 ms
+```
 
 
 
