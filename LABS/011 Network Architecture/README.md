@@ -73,5 +73,5 @@ Links between devices: 10.0.0.0/8
 | VPC7          | eth0          | ?            | ?                | ?               |
 
 
-[tempschema]!(https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/011%20Network%20Architecture/pictures/tmpschema.PNG)
+![tempschema](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/011%20Network%20Architecture/pictures/tmpschema.PNG)
 
