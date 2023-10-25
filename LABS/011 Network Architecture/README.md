@@ -75,7 +75,7 @@ Links between devices: 10.0.0.0/8
 
 L3 Po - не забыть так же для Питера
 Во всех офисах используется (Маршрутизация на access)
-Не забывать навешивать лупбэки!
+Не забывать навешивать лупбэки на всех устройствах кроме VPC!
 
 ![tempschema](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/011%20Network%20Architecture/pictures/tmpschema.PNG)
 
