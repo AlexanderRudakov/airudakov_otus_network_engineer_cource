@@ -49,14 +49,14 @@ Links between devices: 10.0.0.0/8
 | R20           | et0/2         | 10.0.5.2     | 255.255.255.0    | 10.0.5.1        |
 |---------------|---------------|--------------|------------------|-----------------|
 | SW4           | et0/0         | ?            | ?                | ?               |
-|               | et1/3         | ?            | ?                | ?               |
+| L3              | et1/3         | ?            | ?                | ?               |
 | Po (do not)   | et1/0         | ?            | ?                | ?               |
 |      forget   | et1/1         | ?            | ?                | ?               |
 |               | et1/2         | ?            | ?                | ?               |
 |               | et0/1         | ?            | ?                | ?               |
 |---------------|---------------|--------------|------------------|-----------------|
 | SW5           | et1/-         | ?            | ?                | ?               |
-|               | et1/-         | ?            | ?                | ?               |
+|   L3          | et1/-         | ?            | ?                | ?               |
 |   Po (do not) | et0/-         | ?            | ?                | ?               |
 |      forget   | et0/-         | ?            | ?                | ?               |
 |               | et0/-         | ?            | ?                | ?               |
@@ -72,7 +72,8 @@ Links between devices: 10.0.0.0/8
 | VPC1          | eth0          | ?            | ?                | ?               |
 | VPC7          | eth0          | ?            | ?                | ?               |
 
-
+L3 Po - не забыть так же для Питера
+Во всех офисах используется (Маршрутизация на access)
 
 ![tempschema](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/011%20Network%20Architecture/pictures/tmpschema.PNG)
 
