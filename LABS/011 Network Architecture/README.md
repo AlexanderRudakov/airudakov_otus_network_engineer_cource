@@ -19,6 +19,8 @@ VPC 192.168.10.0/24 (VLAN10)
 
 VPC 192.168.20.0/24 (VLAN20)
 
+VLAN547 = native
+
 Loopback: 50.0.0.0/8
 
 Links between devices: 10.0.0.0/8
@@ -105,6 +107,8 @@ VPC 192.168.30.0/24 (VLAN30)
 
 VPC 192.168.40.0/24 (VLAN40)
 
+VLAN547 = native
+
 Loopback: 50.50.0.0/16
 
 Links between devices: 10.20.0.0/16
@@ -164,6 +168,8 @@ Links between devices: 10.20.0.0/16
 VPC 192.168.50.0/24 (VLAN50)
 
 VPC 192.168.60.0/24 (VLAN60)
+
+VLAN547 = native
 
 Loopback: 50.75.0.0/16
 
