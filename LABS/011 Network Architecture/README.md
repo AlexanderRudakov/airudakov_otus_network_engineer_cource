@@ -355,6 +355,6 @@ Loopback: 50.175.0.0/16
 
 ![tempschema](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/011%20Network%20Architecture/pictures/tmpschema.PNG)
 
-
-![for_question1]()
+Вопрос по HSRP (да или нет)
+![for_question1](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/011%20Network%20Architecture/pictures/for_question1.png)
 
