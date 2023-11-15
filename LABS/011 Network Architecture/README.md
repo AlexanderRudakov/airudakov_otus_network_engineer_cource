@@ -86,8 +86,8 @@ Links between devices: 10.0.0.0/8
 | (Access1)  | et1/2            | 10.0.13.2    | 255.255.255.0    | ?               |
 |            | Lo0              | 50.0.10.1    | 255.255.255.0    | N/A             |
 |------------|------------------|--------------|------------------|-----------------|
-| VPC1       | eth0             | ?            | ?                | ?               |
-| VPC7       | eth0             | ?            | ?                | ?               |
+| VPC1       | eth0             | ?            | ?                | 192.168.10.1    |
+| VPC7       | eth0             | ?            | ?                | 192.168.20.1    |
 
 
 # 1.Таблица Адресации (IPv6):
@@ -354,4 +354,7 @@ Loopback: 50.175.0.0/16
 
 
 ![tempschema](https://github.com/AlexanderRudakov/airudakov_otus_network_engineer_cource/blob/main/LABS/011%20Network%20Architecture/pictures/tmpschema.PNG)
+
+
+![for_question1]()
 
