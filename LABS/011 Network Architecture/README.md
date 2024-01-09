@@ -97,7 +97,7 @@ Links between devices: 10.0.0.0/8
 # 1.Таблица Адресации (IPv6):
 ## Москва
 **AS1001**
-(do not forget to turn on IPv6 by using commands: *sh ipv6 unicast-routing, ipv6 enable (on an interface)*)
+(do not forget to turn on IPv6 by using commands: ***sh ipv6 unicast-routing, ipv6 enable (on an interface)***)
 Link local address: FE80::x (номер устройства, например, R14 = FE80::14)
 Global IPv6 address: 2001:AAAA:A095::/64
 
