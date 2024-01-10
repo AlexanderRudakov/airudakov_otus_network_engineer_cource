@@ -98,15 +98,59 @@ Links between devices: 10.0.0.0/8
 ## Москва
 **AS1001**
 (do not forget to turn on IPv6 by using commands: ***sh ipv6 unicast-routing, ipv6 enable (on an interface)***)
-Link local address: FE80::x (номер устройства, например, R14 = FE80::14)
-Global IPv6 address: 2001:AAAA:A095::/64
+Link local address: FE80::x (***x*** номер устройства, например, R14 = FE80::14)
+Global IPv6 address: 2001:AAAA:A095::x/64  (***x*** номер устройства, например, R14 = 2001:AAAA:A095::14/64)
 
-| Device     | Interface        | IP address   | Network Mask     | Gateway         |
-| ---------- | ---------------- | ----------   | ---------------  | --------------  |
-| R14-edge1  | et0/0            |              |                  | N/A             |
-|            | et0/2            |              |                  | N/A             |
-|            | et0/1            |              |                  | N/A             |
-|            | et0/3            |              |                  | N/A             |
+| Device     | Interface        | IP address                 | Gateway                     |
+| ---------- | ---------------- | -------------------------- | --------------------------  |
+| R14-edge1  | et0/0            | 2001:AAAA:A095:0029::14/64 |                             |
+|            | et0/0 Link-local | FE80::14                   |                             |
+|            | et0/2            | 2001:AAAA:A095:0002::14/64 |                             |
+|            | et0/2 Link-local | FE80::14                   |                             |
+|            | et0/1            | 2001:AAAA:A095:0001::14/64 |                             |
+|            | et0/1 Link-local | FE80::14                   |                             |
+|            | et0/3            | 2001:AAAA:A095:0003::14/64 |                             |
+|            | et0/3 Link-local | FE80::14                   |                             |
+|            | lo0              | 2001:AAAA:A095:5001::14/64 |                             |
+|            | lo0   Link-local | FE80::14                   |                             |
+| R15-edge2  | et0/0            | 2001:AAAA:A095:0070::15/64 |                             |
+|            | et0/0 Link-local | FE80::15                   |                             |
+|            | et0/3            | 2001:AAAA:A095:0007::15/64 |                             |
+|            | et0/3 Link-local | FE80::15                   |                             |
+|            | et0/1            | 2001:AAAA:A095:0005::15/64 |                             |
+|            | et0/1 Link-local | FE80::15                   |                             |
+|            | et0/2            | 2001:AAAA:A095:0006::15/64 |                             |
+|            | et0/2 Link-local | FE80::15                   |                             |
+|            | lo0              | 2001:AAAA:A095:5002::15/64 |                             |
+|            | lo0   Link-local | FE80::15                   |                             |
+| R19        | et0/2            | 2001:AAAA:A095:0002::19/64 |                             |
+|            | et0/2 Link-local | FE80::19                   |                             |
+|            | lo0              | 2001:AAAA:A095:5003::19/64 |                             |
+|            | lo0   Link-local | FE80::19                   |                             |
+| R12-core1  | et0/0            | 2001:AAAA:A095:0008::12/64 |                             |
+|            | et0/0 Link-local | FE80::12                   |                             |
+|            | et0/1            | 2001:AAAA:A095:0001::12/64 |                             |
+|            | et0/1 Link-local | FE80::12                   |                             |
+|            | et0/3            | 2001:AAAA:A095:0007::12/64 |                             |
+|            | et0/3 Link-local | FE80::12                   |                             |
+|            | et1/3            | 2001:AAAA:A095:0009::12/64 |                             |
+|            | et1/3 Link-local | FE80::12                   |                             |
+|            | lo0              | 2001:AAAA:A095:5004::12/64 |                             |
+|            | lo0   Link-local | FE80::12                   |                             |
+| R13-core2  | et0/0            | 2001:AAAA:A095:0010::13/64 |                             |
+|            | et0/0 Link-local | FE80::13                   |                             |
+|            | et0/1            | 2001:AAAA:A095:0005::13/64 |                             |
+|            | et0/1 Link-local | FE80::13                   |                             |
+|            | et0/3            | 2001:AAAA:A095:0003::13/64 |                             |
+|            | et0/3 Link-local | FE80::13                   |                             |
+|            | et1/3            | 2001:AAAA:A095:0011::13/64 |                             |
+|            | et1/3 Link-local | FE80::13                   |                             |
+|            | lo0              | 2001:AAAA:A095:5005::13/64 |                             |
+|            | lo0   Link-local | FE80::13                   |                             |
+| R20        | et0/2            | 2001:AAAA:A095:0006::20/64 |                             |
+|            | et0/2 Link-local | FE80::20                   |                             |
+|            | lo0              | 2001:AAAA:A095:5006::20/64 |                             |
+|            | lo0   Link-local | FE80::20                   |                             |
 
 
 # 1.Таблица Адресации (IPv4):
